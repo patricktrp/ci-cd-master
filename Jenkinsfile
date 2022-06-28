@@ -21,5 +21,8 @@ pipeline {
                 }
             }
         }
+        stage('Trigger Manifest Update') {
+            build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: $BUILD_NUMBER)]
+        }
     }
 }
