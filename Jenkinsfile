@@ -23,8 +23,10 @@ pipeline {
         }
         stage('Trigger Manifest Update') {
             steps{
-                def buildnum = '$BUILD_NUMBER'
-            build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: buildnum)]
+                script {
+                        def buildnum = '$BUILD_NUMBER'
+                        build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: ${buildnum)]
+                }
             }
         }
     }
