@@ -5,6 +5,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhubpwd', passwordVariable: 'dockerpwd', usernameVariable: 'dockerusername')]) {
+                        checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/patricktrp/ci-cd-master.git']]])
                         sh 'docker build -t ${dockerusername}/ci-cd-master:$BUILD_NUMBER .'
                     }
                 }
